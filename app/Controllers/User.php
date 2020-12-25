@@ -5,6 +5,8 @@ namespace App\Controllers;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\UserModel;
+use App\Controllers\Auth;
+use \Firebase\JWT\JWT;
 
 class User extends ResourceController
 {
@@ -15,12 +17,41 @@ class User extends ResourceController
     public function __construct()
     {
         $this->userModel = new UserModel();
+        $this->protect = new Auth();
     }
 
     public function index()
     {
-        $data = $this->userModel->getUser();
-        return $this->respond($data, 200);
+        $secret_key = $this->protect->privateKey();
+
+        $token = null;
+
+        $authHeader = $this->request->getServer('HTTP_AUTHORIZATION');
+        $arr = explode(' ', $authHeader);
+
+        $token = $arr[1];
+
+        if ($token) {
+            try {
+                $decoded = JWT::decode($token, $secret_key, array('HS256'));
+
+                // Access is granted. Add code of the operation here 
+                if ($decoded) {
+                    // response true
+
+                    $output = $this->userModel->getUser();
+                    return $this->respond($output, 200);
+                }
+            } catch (\Exception $e) {
+                $output = [
+                    'message' => 'Access denied',
+                    "error" => $e->getMessage()
+                ];
+                return $this->respond($output, 401);
+            }
+        }
+
+        // return $this->respond($data, 200);
     }
 
     public function show($id = false)

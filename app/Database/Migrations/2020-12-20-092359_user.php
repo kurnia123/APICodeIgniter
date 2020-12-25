@@ -24,7 +24,7 @@ class User extends Migration
 			],
 			'password_user' => [
 				'type' => 'VARCHAR',
-				'constraint' => '30'
+				'constraint' => '255'
 			],
 			'is_seller' => [
 				'type' => 'tinyint',
