@@ -16,7 +16,7 @@ class PromoModel extends Model
         'promo_expired'
     ];
 
-    public function getKeranjang($id = false)
+    public function getPromo($id = false)
     {
         if ($id == false) {
             return $this->findAll();
