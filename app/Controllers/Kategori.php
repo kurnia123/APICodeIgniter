@@ -4,28 +4,28 @@ namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
-use App\Models\PembayaranModel;
+use App\Models\KategoriModel;
 
-class Pembayaran extends ResourceController
+class Kategori extends ResourceController
 {
     use ResponseTrait;
 
-    protected $pembayaranModel;
+    protected $kategoriModel;
 
     public function __construct()
     {
-        $this->pembayaranModel = new PembayaranModel();
+        $this->kategoriModel = new KategoriModel();
     }
 
     public function index()
     {
-        $data = $this->pembayaranModel->getPembayaran();
+        $data = $this->kategoriModel->getKategori();
         return $this->respond($data, 200);
     }
 
     public function show($id = false)
     {
-        $data = $this->pembayaranModel->getPembayaran($id);
+        $data = $this->kategoriModel->getKategori($id);
         if ($data) {
             return $this->respond($data);
         } else {
@@ -36,14 +36,12 @@ class Pembayaran extends ResourceController
     public function create()
     {
         $data = [
-            'jumlah_bayar' => intval($this->request->getPost('jumlah_bayar')),
-            'jenis_bayar' => $this->request->getPost('jenis_bayar'),
-            'id_cart' => intval($this->request->getPost('id_cart')),
-            'tanggal_pembayaran' => $this->request->getPost('tanggal_pembayaran'),
+            'id_produk' => $this->request->getPost('nama_kategori'),
+            'promo_expired' => $this->request->getPost('promo_expired'),
         ];
 
         // $data = json_decode(file_get_contents("php://input"));
-        $this->pembayaranModel->insert($data);
+        $this->kategoriModel->insert($data);
         $response = [
             'status' => 201,
             'error' => null,
@@ -61,22 +59,18 @@ class Pembayaran extends ResourceController
 
         if ($json) {
             $data = [
-                'jumlah_bayar' => intval($json->jumlah_bayar),
-                'jenis_bayar' => $json->jenis_bayar,
-                'id_cart' => intval($json->id_cart),
-                'tanggal_pembayaran' => $json->tanggal_pembayaran,
+                'nama_kategori' => $json->nama_kategori,
+                'promo_expired' => $json->promo_expired
             ];
         } else {
             $input = $this->request->getRawInput();
             $data = [
-                'jumlah_bayar' => intval($input['jumlah_bayar']),
-                'jenis_bayar' => $input['jenis_bayar'],
-                'id_cart' => intval($input['id_cart']),
-                'tanggal_pembayaran' => $input['tanggal_pembayaran'],
+                'nama_kategori' => $input['nama_kategori'],
+                'promo_expired' => $input['promo_expired'],
             ];
         }
 
-        $this->pembayaranModel->update($id, $data);
+        $this->kategoriModel->update($id, $data);
         $response = [
             'status' => 200,
             'error' => null,
@@ -90,9 +84,9 @@ class Pembayaran extends ResourceController
 
     public function delete($id = null)
     {
-        $data = $this->pembayaranModel->find($id);
+        $data = $this->kategoriModel->find($id);
         if ($data) {
-            $this->pembayaranModel->delete($id);
+            $this->kategoriModel->delete($id);
             $response = [
                 'status' => 200,
                 'error' => null,

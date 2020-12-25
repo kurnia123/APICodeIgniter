@@ -41,7 +41,7 @@ class Promo extends ResourceController
             'id_produk' => intval($this->request->getPost('id_produk')),
             'jumlah_promo_percent' => intval($this->request->getPost('jumlah_promo_percent')),
             'jumlah_promo_max' => intval($this->request->getPost('jumlah_promo_max')),
-            'promo_expired' => intval($this->request->getPost('promo_expired')),
+            'promo_expired' => $this->request->getPost('promo_expired'),
         ];
 
         // $data = json_decode(file_get_contents("php://input"));
@@ -68,7 +68,7 @@ class Promo extends ResourceController
                 'id_produk' => intval($json->id_produk),
                 'jumlah_promo_percent' => intval($json->jumlah_promo_percent),
                 'jumlah_promo_max' => intval($json->jumlah_promo_max),
-                'promo_expired' => intval($json->promo_expired),
+                'promo_expired' => $json->promo_expired,
             ];
         } else {
             $input = $this->request->getRawInput();
@@ -78,7 +78,7 @@ class Promo extends ResourceController
                 'id_produk' => intval($input['id_produk']),
                 'jumlah_promo_percent' => intval($input['jumlah_promo_percent']),
                 'jumlah_promo_max' => intval($input['jumlah_promo_max']),
-                'promo_expired' => intval($input['promo_expired']),
+                'promo_expired' => $input['promo_expired'],
             ];
         }
 
