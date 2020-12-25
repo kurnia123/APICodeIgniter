@@ -36,7 +36,7 @@ class Kategori extends ResourceController
     public function create()
     {
         $data = [
-            'id_produk' => $this->request->getPost('nama_kategori'),
+            'nama_kategori' => $this->request->getPost('nama_kategori'),
             'promo_expired' => $this->request->getPost('promo_expired'),
         ];
 
