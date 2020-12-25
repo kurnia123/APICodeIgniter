@@ -24,8 +24,8 @@ class Kategori extends Migration
 				'null' => TRUE
 			]
 		]);
-		$this->forge->addKey('id_promo', TRUE);
-		$this->forge->createTable('promo');
+		$this->forge->addKey('id_kategori', TRUE);
+		$this->forge->createTable('kategori');
 	}
 
 	//--------------------------------------------------------------------
