@@ -33,3 +33,13 @@ lalu lakukan perintah migrate
 ```bash
 php spark migrate
 ```
+
+## URL API
+list URL API
+
+```bash
+localhost/user
+localhost/keranjang
+localhost/pembayaran
+localhost/produk
+localhost/transaksi
