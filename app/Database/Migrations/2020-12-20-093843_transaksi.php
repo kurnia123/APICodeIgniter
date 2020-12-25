@@ -17,7 +17,7 @@ class Transaksi extends Migration
 			],
 			'id_user'		=> [
 				'type' => 'INT',
-				'constraint' => 10
+				'constraint' => '11'
 			],
 			'id_produk' => [
 				'type' => 'INT',
