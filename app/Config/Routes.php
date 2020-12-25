@@ -37,6 +37,7 @@ $routes->resource('keranjang');
 $routes->resource('pembayaran');
 $routes->resource('produk');
 $routes->resource('transaksi');
+$routes->resource('promo');
 
 
 /**
