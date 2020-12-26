@@ -75,6 +75,7 @@ class Auth extends ResourceController
 
     public function login()
     {
+        date_default_timezone_set("Asia/Jakarta");
         $username      = $this->request->getPost('username_user');
         $password   = $this->request->getPost('password_user');
 
@@ -109,7 +110,7 @@ class Auth extends ResourceController
                 'message' => 'Berhasil login',
                 "token" => $token,
                 "email" => $username,
-                "expireAt" => $expire_claim
+                "expireAt" => date('Y-m-d h:i:s', $expire_claim)
             ];
             return $this->respond($output, 200);
         } else {

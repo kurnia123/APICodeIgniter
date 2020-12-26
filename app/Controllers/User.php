@@ -29,7 +29,12 @@ class User extends ResourceController
         $authHeader = $this->request->getServer('HTTP_AUTHORIZATION');
         $arr = explode(' ', $authHeader);
 
-        $token = $arr[1];
+        // $token = $arr[1];
+        try {
+            $token = $arr[1];
+        } catch (\Throwable $th) {
+            $token = "kosong";
+        }
 
         if ($token) {
             try {
@@ -40,12 +45,13 @@ class User extends ResourceController
                     // response true
 
                     $output = $this->userModel->getUser();
-                    return $this->respond($output, 200);
+                    return $this->respond(["database" => $output, "token" => $arr], 200);
                 }
             } catch (\Exception $e) {
                 $output = [
                     'message' => 'Access denied',
-                    "error" => $e->getMessage()
+                    "error" => $e->getMessage(),
+                    "token" => $token
                 ];
                 return $this->respond($output, 401);
             }
