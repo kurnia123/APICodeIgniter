@@ -22,42 +22,8 @@ class User extends ResourceController
 
     public function index()
     {
-        $secret_key = $this->protect->privateKey();
-
-        $token = null;
-
-        $authHeader = $this->request->getServer('HTTP_AUTHORIZATION');
-        $arr = explode(' ', $authHeader);
-
-        // $token = $arr[1];
-        try {
-            $token = $arr[1];
-        } catch (\Throwable $th) {
-            $token = "kosong";
-        }
-
-        if ($token) {
-            try {
-                $decoded = JWT::decode($token, $secret_key, array('HS256'));
-
-                // Access is granted. Add code of the operation here 
-                if ($decoded) {
-                    // response true
-
-                    $output = $this->userModel->getUser();
-                    return $this->respond(["database" => $output, "token" => $arr], 200);
-                }
-            } catch (\Exception $e) {
-                $output = [
-                    'message' => 'Access denied',
-                    "error" => $e->getMessage(),
-                    "token" => $token
-                ];
-                return $this->respond($output, 401);
-            }
-        }
-
-        // return $this->respond($data, 200);
+        $output = $this->userModel->getUser();
+        return $this->respond($output, 200);
     }
 
     public function show($id = false)

@@ -12,7 +12,8 @@ class Filters extends BaseConfig
 		'csrf'     => \CodeIgniter\Filters\CSRF::class,
 		'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
-		'cors'	   => \App\Filters\Cors::class
+		'cors'	   => \App\Filters\Cors::class,
+		'ceklogin' => \App\Filters\LoginFilter::class
 	];
 
 	// Always applied before every request

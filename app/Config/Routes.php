@@ -17,7 +17,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('Auth');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -32,13 +32,13 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 // $routes->get('/', 'User::index');
-$routes->resource('user');
-$routes->resource('keranjang');
-$routes->resource('pembayaran');
-$routes->resource('produk');
-$routes->resource('transaksi');
-$routes->resource('promo');
-$routes->resource('kategori');
+$routes->resource('user', ['filter' => 'ceklogin']);
+$routes->resource('keranjang', ['filter' => 'ceklogin']);
+$routes->resource('pembayaran', ['filter' => 'ceklogin']);
+$routes->resource('produk', ['filter' => 'ceklogin']);
+$routes->resource('transaksi', ['filter' => 'ceklogin']);
+$routes->resource('promo', ['filter' => 'ceklogin']);
+$routes->resource('kategori', ['filter' => 'ceklogin']);
 
 
 /**

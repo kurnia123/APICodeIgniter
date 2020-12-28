@@ -5,6 +5,8 @@ namespace App\Filters;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
+use \Firebase\JWT\JWT;
+use App\Controllers\Auth;
 
 class LoginFilter implements FilterInterface
 {
@@ -12,12 +14,26 @@ class LoginFilter implements FilterInterface
     {
         $authHeader = $request->getServer('HTTP_AUTHORIZATION');
         $arr = explode(' ', $authHeader);
+        $secret_key = Auth::privateKey();
 
         try {
             $token = $arr[1];
         } catch (\Throwable $th) {
-            $token = "kosong";
-            return redirect()->to('localhost/login.html');
+            $token = "";
+        }
+
+        if ($token != "") {
+            try {
+                $decoded = JWT::decode($token, $secret_key, array('HS256'));
+
+                if ($decoded) {
+                    // return redirect()->to($)
+                }
+            } catch (\Exception $e) {
+                return redirect()->to("http://ehee.com/login.html");
+            }
+        } else {
+            return redirect()->to("http://ehee.com/login.html");
         }
     }
 

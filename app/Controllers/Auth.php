@@ -18,7 +18,7 @@ class Auth extends ResourceController
         $this->auth = new AuthModel();
     }
 
-    public function privateKey()
+    public static function privateKey()
     {
         $privateKey = <<<EOD
         -----BEGIN RSA PRIVATE KEY-----
@@ -104,14 +104,19 @@ class Auth extends ResourceController
             );
 
             $token = JWT::encode($token, $secret_key);
+            // set Cookies
+            // $resulCookies = setcookie("token", $token, $expire_claim, '/', 'localhost');
 
             $output = [
                 'status' => 200,
                 'message' => 'Berhasil login',
                 "token" => $token,
-                "email" => $username,
-                "expireAt" => date('Y-m-d h:i:s', $expire_claim)
+                "username_user" => $username,
+                "expireAt" => date('D, d M Y h:i:s', $expire_claim) . " GMT"
             ];
+
+
+
             return $this->respond($output, 200);
         } else {
             $output = [
