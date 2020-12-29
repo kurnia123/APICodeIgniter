@@ -30,10 +30,10 @@ class LoginFilter implements FilterInterface
                     // return redirect()->to($)
                 }
             } catch (\Exception $e) {
-                return redirect()->to("http://ehee.com/login.html");
+                return redirect()->to("http://localhost/login.html");
             }
         } else {
-            return redirect()->to("http://ehee.com/login.html");
+            return redirect()->to("http://localhost/produk.html");
         }
     }
 

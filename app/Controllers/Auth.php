@@ -104,8 +104,6 @@ class Auth extends ResourceController
             );
 
             $token = JWT::encode($token, $secret_key);
-            // set Cookies
-            // $resulCookies = setcookie("token", $token, $expire_claim, '/', 'localhost');
 
             $output = [
                 'status' => 200,
@@ -115,9 +113,20 @@ class Auth extends ResourceController
                 "expireAt" => date('D, d M Y h:i:s', $expire_claim) . " GMT"
             ];
 
+            // $arr_cookie_options = array(
+            //     'expires' => time() + (10 * 60 * 60),
+            //     'path' => '/',
+            //     'domain' => 'localhost', // leading dot for compatibility or use subdomain
+            //     'secure' => false,     // or false
+            //     'httponly' => false,    // or false
+            //     'samesite' => 'Lax' // None || Lax  || Strict
+            // );
+            // setcookie('token', $token, $arr_cookie_options);
+            // setcookie('id_user', $username, $arr_cookie_options);
 
 
             return $this->respond($output, 200);
+            // return redirect()->to('http://localhost');
         } else {
             $output = [
                 'status' => 401,
