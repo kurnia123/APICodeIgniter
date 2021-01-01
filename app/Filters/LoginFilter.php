@@ -22,7 +22,7 @@ class LoginFilter implements FilterInterface
             $token = "";
         }
 
-        if ($token != "") {
+        if ($token !== null) {
             try {
                 $decoded = JWT::decode($token, $secret_key, array('HS256'));
 
@@ -30,10 +30,10 @@ class LoginFilter implements FilterInterface
                     // return redirect()->to($)
                 }
             } catch (\Exception $e) {
-                return redirect()->to("http://localhost/login.html");
+                return redirect()->to("http://localhost/login.html?url=");
             }
         } else {
-            return redirect()->to("http://localhost/produk.html");
+            return redirect()->to("http://localhost/login.html?url=");
         }
     }
 

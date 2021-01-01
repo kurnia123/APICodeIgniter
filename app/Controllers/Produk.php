@@ -37,13 +37,25 @@ class Produk extends ResourceController
     {
         $data = [
             'nama_produk' => $this->request->getPost('nama_produk'),
-            'filename_produk' => $this->request->getPost('filename_produk'),
             'deskripsi_produk' => $this->request->getPost('deskripsi_produk'),
             'kategori_produk' => $this->request->getPost('kategori_produk'),
             'id_user' => intval($this->request->getPost('id_user')),
             'harga_produk' => intval($this->request->getPost('harga_produk')),
             'stok_produk' => intval($this->request->getPost('stok_produk')),
         ];
+        // ambil gambar
+        $getFile = $this->request->getFile('filename_produk');
+
+        if ($getFile->getError() == 4) {
+            $namaFile = "default.png";
+        } else {
+            // generate nama secara random
+            $namaFile = $getFile->getRandomName();
+            // pindahkan file ke folder public/img
+            $getFile->move('img', $namaFile);
+        }
+
+        $data['filename_produk'] = $namaFile;
 
         // $data = json_decode(file_get_contents("php://input"));
         $this->produkModel->insert($data);
@@ -100,6 +112,11 @@ class Produk extends ResourceController
     public function delete($id = null)
     {
         $data = $this->produkModel->find($id);
+
+        if ($data['filename_produk'] != 'default.png') {
+            unlink('img/' . $data['filename_produk']);
+        }
+
         if ($data) {
             $this->produkModel->delete($id);
             $response = [

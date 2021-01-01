@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class AuthModel extends Model
 {
-    protected $table = "user_developer";
+    protected $table = "user";
 
     public function register($data)
     {

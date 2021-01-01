@@ -64,7 +64,6 @@ class User extends ResourceController
 
         if ($json) {
             $data = [
-                'name_user' => $json->name_user,
                 'username_user' => $json->username_user,
                 'password_user' => $json->password__user,
                 'is_seller' => $json->is_seller,
@@ -72,7 +71,6 @@ class User extends ResourceController
         } else {
             $input = $this->request->getRawInput();
             $data = [
-                'name_user' => $input['name_user'],
                 'username_user' => $input['username_user'],
                 'password_user' => $input['password_user'],
                 'is_seller' => $input['is_seller'],
