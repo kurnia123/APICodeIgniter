@@ -18,10 +18,6 @@ class Kategori extends Migration
 			'nama_kategori' => [
 				'type' => 'VARCHAR',
 				'constraint' => 10
-			],
-			'promo_expired' => [
-				'type' => 'DATETIME',
-				'null' => TRUE
 			]
 		]);
 		$this->forge->addKey('id_kategori', TRUE);

@@ -8,7 +8,7 @@ class KeranjangModel extends Model
 {
     protected $table = 'keranjang';
     protected $primaryKey = 'id_cart';
-    protected $allowedFields = ['id_produk', 'jumlah_pesan', 'harga_total'];
+    protected $allowedFields = ['id_produk', 'jumlah_pesan', 'harga_total', 'id_user', 'size'];
 
     public function getKeranjang($id = false)
     {
@@ -16,6 +16,6 @@ class KeranjangModel extends Model
             return $this->findAll();
         }
 
-        return $this->where(['id_cart' => $id])->first();
+        return $this->where(['id_user' => $id])->findAll();
     }
 }

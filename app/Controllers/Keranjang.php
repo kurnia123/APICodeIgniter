@@ -39,6 +39,8 @@ class Keranjang extends ResourceController
             'id_produk' => intval($this->request->getPost('id_produk')),
             'jumlah_pesan' => intval($this->request->getPost('jumlah_pesan')),
             'harga_total' => intval($this->request->getPost('harga_total')),
+	    'id_user' => intval($this->request->getPost('id_user')),
+            'size' => $this->request->getPost('size'),
         ];
 
         // $data = json_decode(file_get_contents("php://input"));
@@ -63,6 +65,8 @@ class Keranjang extends ResourceController
                 'id_produk' => intval($json->id_produk),
                 'jumlah_pesan' => intval($json->jumlah_pesan),
                 'harga_total' => intval($json->harga_total),
+		'id_user' => intval($json->id_user),
+                'size' => $json->size,
             ];
         } else {
             $input = $this->request->getRawInput();
@@ -70,6 +74,8 @@ class Keranjang extends ResourceController
                 'id_produk' => intval($input['id_produk']),
                 'jumlah_pesan' => intval($input['jumlah_pesan']),
                 'harga_total' => intval($input['harga_total']),
+		'id_user' => intval($input['id_user']),
+                'size' => $input['size'],
             ];
         }
 

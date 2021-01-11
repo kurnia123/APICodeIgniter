@@ -36,8 +36,7 @@ class Kategori extends ResourceController
     public function create()
     {
         $data = [
-            'nama_kategori' => $this->request->getPost('nama_kategori'),
-            'promo_expired' => $this->request->getPost('promo_expired'),
+            'nama_kategori' => $this->request->getPost('nama_kategori')
         ];
 
         // $data = json_decode(file_get_contents("php://input"));
@@ -59,14 +58,12 @@ class Kategori extends ResourceController
 
         if ($json) {
             $data = [
-                'nama_kategori' => $json->nama_kategori,
-                'promo_expired' => $json->promo_expired
+                'nama_kategori' => $json->nama_kategori
             ];
         } else {
             $input = $this->request->getRawInput();
             $data = [
-                'nama_kategori' => $input['nama_kategori'],
-                'promo_expired' => $input['promo_expired'],
+                'nama_kategori' => $input['nama_kategori']
             ];
         }
 

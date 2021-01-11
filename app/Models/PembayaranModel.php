@@ -8,7 +8,7 @@ class PembayaranModel extends Model
 {
     protected $table = 'pembayaran';
     protected $primaryKey = 'id_pembayaran';
-    protected $allowedFields = ['jumlah_bayar', 'jenis_bayar', 'id_cart'];
+    protected $allowedFields = ['jumlah_bayar', 'tanggal_pembayaran', 'id_produk', 'id_user'];
 
     public function getPembayaran($id = false)
     {
@@ -16,6 +16,6 @@ class PembayaranModel extends Model
             return $this->findAll();
         }
 
-        return $this->where(['id_pembayaran' => $id])->first();
+        return $this->where(['id_user' => $id])->findAll();
     }
 }

@@ -9,8 +9,7 @@ class KategoriModel extends Model
     protected $table = 'kategori';
     protected $primaryKey = 'id_kategori';
     protected $allowedFields = [
-        'nama_kategori',
-        'promo_expired'
+        'nama_kategori'
     ];
 
     public function getKategori($id = false)

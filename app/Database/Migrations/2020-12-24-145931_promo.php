@@ -24,6 +24,11 @@ class Promo extends Migration
 				'constraint' => 10,
 				'null' => true
 			],
+			'nama_produk' => [
+				'type' => 'VARCHAR',
+				'constraint' => '255',
+				'null' => true
+			],
 			'jumlah_promo_percent' => [
 				'type' => 'INT',
 				'constraint' => 10

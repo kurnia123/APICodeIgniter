@@ -13,8 +13,9 @@ class PromoModel extends Model
         'id_produk',
         'jumlah_promo_percent',
         'jumlah_promo_max',
-        'promo_expired'
-    ];
+        'promo_expired',
+   	'nama_promo' 
+   ];
 
     public function getPromo($id = false)
     {
@@ -23,5 +24,13 @@ class PromoModel extends Model
         }
 
         return $this->where(['id_promo' => $id])->first();
+    }
+
+    public function getPromoByIdUser($id = false) {
+        if ($id == false) {
+            return $this->findAll();
+        }
+
+        return $this->where(['id_user' => $id])->findAll();
     }
 }

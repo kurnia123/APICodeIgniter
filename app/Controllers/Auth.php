@@ -131,18 +131,19 @@ class Auth extends ResourceController
                 'samesite' => 'Lax' // None || Lax  || Strict
             );
 
-            setcookie('id_user', $username, $arr_cookie_options);
+            setcookie('id_user',  $user['id_user'], $arr_cookie_options);
             setcookie('token', $token, $arr_cookie_options);
+            setcookie('is_seller', $user['is_seller'], $arr_cookie_options);
 
             $output = [
                 'status' => 200,
                 'message' => 'Berhasil login',
-                "token" => $token . "|" . $username . "|" . $url,
+                "token" => $token . "|" . $user['id_user'] . "|" . $user['is_seller'] . "|" . $url,
                 "username_user" => $username,
                 "url" => $url,
                 "expireAt" => date('D, d M Y h:i:s', $expire_claim) . " GMT",
                 "default Time zone" => date_default_timezone_get(),
-                "id_user" => $user
+                "is_seller" => $user['is_seller']
             ];
 
 

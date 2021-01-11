@@ -33,13 +33,24 @@ class Promo extends ResourceController
         }
     }
 
+    public function showPromoByIdUser($id = false)
+    {
+        $data = $this->promoModel->getPromoByIdUser($id);
+        if ($data) {
+            return $this->respond($data);
+        } else {
+            return $this->failNotFound("tidak ditemukan data dengan ID : " . $id);
+        }
+    }
+
     public function create()
     {
         $data = [
             'id_promo' => intval($this->request->getPost('id_promo')),
             'id_user' => intval($this->request->getPost('id_user')),
             'id_produk' => intval($this->request->getPost('id_produk')),
-            'jumlah_promo_percent' => intval($this->request->getPost('jumlah_promo_percent')),
+            'nama_promo' => $this->request->getPost('nama_promo'),
+	    'jumlah_promo_percent' => intval($this->request->getPost('jumlah_promo_percent')),
             'jumlah_promo_max' => intval($this->request->getPost('jumlah_promo_max')),
             'promo_expired' => $this->request->getPost('promo_expired'),
         ];

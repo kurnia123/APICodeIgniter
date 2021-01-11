@@ -64,15 +64,31 @@ class User extends ResourceController
 
         if ($json) {
             $data = [
+                'firstname_user' => $json->firstname_user,
+                'lastname_user' => $json->lastname_user,
                 'username_user' => $json->username_user,
-                'password_user' => $json->password__user,
+                'password_user' => $json->password_user,
+                'alamat' => $json->alamat,
+                'provinsi' => $json->provinsi,
+                'kabupaten' => $json->kabupaten,
+                'kecamatan' => $json->kecamatan,
+                'no_telephone' => $json->no_telephone,
+                'bio' => $json->bio,
                 'is_seller' => $json->is_seller,
             ];
         } else {
             $input = $this->request->getRawInput();
             $data = [
+                'firstname_user' => $input['firstname_user'],
+                'lastname_user' => $input['lastname_user'],
                 'username_user' => $input['username_user'],
                 'password_user' => $input['password_user'],
+                'alamat' => $input['alamat'],
+                'provinsi' => $input['provinsi'],
+                'kabupaten' => $input['kabupaten'],
+                'kecamatan' => $input['kecamatan'],
+                'no_telephone' => $input['no_telephone'],
+                'bio' => $input['bio'],
                 'is_seller' => $input['is_seller'],
             ];
         }
@@ -88,6 +104,35 @@ class User extends ResourceController
 
         return $this->respond($response);
     }
+
+
+    public function updateSeller($id = null)
+    {
+        $json = $this->request->getJSON();
+
+        if ($json) {
+            $data = [
+                'is_seller' => $json->is_seller,
+            ];
+        } else {
+            $input = $this->request->getRawInput();
+            $data = [
+                'is_seller' => $input['is_seller'],
+            ];
+        }
+
+        $this->userModel->update($id, $data);
+        $response = [
+            'status' => 200,
+            'error' => null,
+            'message' => [
+                'success' => 'Data berhasil di Update'
+            ]
+        ];
+
+        return $this->respond($response);
+    }
+
 
     public function delete($id = null)
     {

@@ -33,6 +33,25 @@ class Produk extends ResourceController
         }
     }
 
+    public function getProdukMultiple($id = false)
+    {
+        $data = $this->produkModel->getProdukMultipleCondtion($id);
+        if ($data) {
+            return $this->respond($data);
+        } else {
+            return $this->failNotFound("tidak ditemukan data dengan ID : " . $id);
+        }
+    }
+
+    public function getProdukByIdUser($id = false) {
+        $data = $this->produkModel->getProdukByIdUser($id);
+        if ($data) {
+            return $this->respond($data);
+        } else {
+            return $this->failNotFound("tidak ditemukan data dengan ID : " . $id);
+        }
+    }
+
     public function create()
     {
         $data = [

@@ -32,6 +32,13 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 // $routes->get('/', 'User::index');
+// $routes->get('/user/updateseller/(:num)', 'User::updateSeller/$1');
+$routes->get('produkfilter/(:segment)', 'Produk::getProdukMultiple/$1');
+$routes->get('produkuser/(:segment)', 'Produk::getProdukByIdUser/$1');
+
+// Route Promo
+$routes->get('promouser/(:segment)', 'Promo::showPromoByIdUser/$1');
+
 $routes->resource('user');
 $routes->resource('keranjang');
 $routes->resource('pembayaran');

@@ -26,6 +26,14 @@ class Keranjang extends Migration
 			'harga_total' => [
 				'type' => 'INT',
 				'constraint' => 30
+			],
+			'id_user' => [
+				'type' => 'INT',
+				'constraint' => 100
+			],
+			'user' => [
+				'type' => 'VARCHAR',
+				'constraint' => 50
 			]
 		]);
 		$this->forge->addKey('id_cart', TRUE);

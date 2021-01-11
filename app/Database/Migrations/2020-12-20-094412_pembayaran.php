@@ -19,11 +19,11 @@ class Pembayaran extends Migration
 				'type' => 'INT',
 				'constraint' => 20
 			],
-			'jenis_bayar' => [
-				'type' => 'VARCHAR',
-				'constraint' => '30'
+			'id_produk' => [
+				'type' => 'INT',
+				'constraint' => 11
 			],
-			'id_cart' => [
+			'id_user' => [
 				'type' => 'INT',
 				'constraint' => 11
 			],

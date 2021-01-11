@@ -37,8 +37,8 @@ class Pembayaran extends ResourceController
     {
         $data = [
             'jumlah_bayar' => intval($this->request->getPost('jumlah_bayar')),
-            'jenis_bayar' => $this->request->getPost('jenis_bayar'),
-            'id_cart' => intval($this->request->getPost('id_cart')),
+            'id_produk' => intval($this->request->getPost('id_produk')),
+	    'id_user' => intval($this->request->getPost('id_user')),
             'tanggal_pembayaran' => $this->request->getPost('tanggal_pembayaran'),
         ];
 
@@ -62,16 +62,16 @@ class Pembayaran extends ResourceController
         if ($json) {
             $data = [
                 'jumlah_bayar' => intval($json->jumlah_bayar),
-                'jenis_bayar' => $json->jenis_bayar,
-                'id_cart' => intval($json->id_cart),
+                'id_produk' => intval($json->id_produk),
+		'id_user' => intval($json->id_user),
                 'tanggal_pembayaran' => $json->tanggal_pembayaran,
             ];
         } else {
             $input = $this->request->getRawInput();
             $data = [
                 'jumlah_bayar' => intval($input['jumlah_bayar']),
-                'jenis_bayar' => $input['jenis_bayar'],
-                'id_cart' => intval($input['id_cart']),
+                'id_produk' => intval($input['id_produk']),
+		'id_user' => intval($json->id_user),
                 'tanggal_pembayaran' => $input['tanggal_pembayaran'],
             ];
         }
